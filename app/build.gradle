@@ -23,6 +23,10 @@ android {
         free {
             applicationId "com.course.hsfreitas.laughoutloud.free"
             versionName "1.0-free"
+
+            dependencies{
+                compile 'com.google.android.gms:play-services:8.3.0'
+            }
         }
 
         paid {
@@ -38,6 +42,5 @@ dependencies {
     compile project(":libjavajokes")
     compile project(":libandroid")
     compile 'com.android.support:appcompat-v7:23.1.0'
-    compile 'com.google.android.gms:play-services:8.3.0'
     compile project(path: ':backend', configuration: 'android-endpoints')
 }

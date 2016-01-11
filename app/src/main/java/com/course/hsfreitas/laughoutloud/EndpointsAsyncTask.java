@@ -3,7 +3,6 @@ package com.course.hsfreitas.laughoutloud;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.util.Pair;
-import android.widget.Toast;
 
 import com.example.hamilton.freitas.myapplication.backend.myApi.MyApi;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -12,13 +11,19 @@ import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import java.io.IOException;
 
 /**
- * Created by hsfreitas on 2015-12-22.
+ * Created by hamilton.freitas on 2016-01-11.
  */
 public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
-    private static MyApi myApiService = null;
+    private MyApi myApiService = null;
     private Context context;
     private JsonGetTaskListener mListener = null;
     private Exception mError = null;
+    private String jokeresult = "Emtpty";
+
+    public  String getJokeresult() {
+        return jokeresult;
+    }
+
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
@@ -55,9 +60,13 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
 
     @Override
     protected void onPostExecute(String result) {
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        //Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
+        //Waiting for response for testing
         if (this.mListener != null)
             this.mListener.onComplete(result, mError);
+
+        jokeresult = result;
     }
 
     @Override
@@ -73,7 +82,11 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
         return this;
     }
 
-    public static interface JsonGetTaskListener {
+    public interface JsonGetTaskListener {
         public void onComplete(String jsonString, Exception e);
     }
+
+
 }
+
+
